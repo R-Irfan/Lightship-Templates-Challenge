@@ -9,6 +9,7 @@ public class CommandDog : MonoBehaviour
     void Start()
     {
         anim = GetComponent<Animator>();
+        anim.Play("Idle");
     }
 
     // Update is called once per frame
@@ -20,39 +21,23 @@ public class CommandDog : MonoBehaviour
     public void Pamper() 
     {
         Debug.Log("Set Anim");
-        anim.ResetTrigger("ShakeHand");
-        anim.ResetTrigger("Scold");
-        anim.ResetTrigger("Travel");
-        anim.ResetTrigger("Pamper");
-        anim.SetTrigger("Pamper");
+        anim.Play("Pamper");
     }
 
     public void ShakeHand()
     {
         Debug.Log("Set Anim");
-        anim.SetTrigger("ShakeHand");
-        anim.ResetTrigger("Scold");
-        anim.ResetTrigger("Travel");
-        anim.ResetTrigger("Pamper");
-        anim.ResetTrigger("Pamper");
+        anim.Play("ShakeHand");
     }
     public void Travel()
     {
         Debug.Log("Set Anim");
-        anim.ResetTrigger("ShakeHand");
-        anim.ResetTrigger("Scold");
-        anim.SetTrigger("Travel");
-        anim.ResetTrigger("Pamper");
-        anim.ResetTrigger("Pamper");
+        anim.Play("Travel");
     }
     public void Scold()
     {
         Debug.Log("Set Anim");
-        anim.ResetTrigger("ShakeHand");
-        anim.SetTrigger("Scold");
-        anim.ResetTrigger("Travel");
-        anim.ResetTrigger("Pamper");
-        anim.ResetTrigger("Pamper");
+        anim.Play("Scold");
     }
 
 

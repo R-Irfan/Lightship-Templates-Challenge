@@ -14,11 +14,15 @@ namespace Niantic.ARDK.Templates
 {
     public class PlaneTrackerController : MonoBehaviour
     {
+        bool spawned = false;
         [HideInInspector]
         public ObjectHolderController OHcontroller;
         [HideInInspector]
         public ARPlaneManager PlaneManager;
         public enum PlaneOption {Horizontal, Vertical};
+
+        [SerializeField]
+        GameObject insText, menu, followButton, doggy;
 
         public bool Transition = true;
         public bool ShowPlaneHelper = true;
@@ -52,14 +56,24 @@ namespace Niantic.ARDK.Templates
 
         void Update() 
         {
-            if (_animationRunning) TranslateToPosition();
-
-            if (PlatformAgnosticInput.touchCount <= 0) return;
-
-            var touch = PlatformAgnosticInput.GetTouch(0);
-            if (touch.phase == TouchPhase.Began) 
+            if (!spawned)
             {
-                TouchBegan(touch);
+                menu.SetActive(true);
+                followButton.SetActive(true);
+                if (_animationRunning) TranslateToPosition();
+
+                if (PlatformAgnosticInput.touchCount <= 0) return;
+
+                var touch = PlatformAgnosticInput.GetTouch(0);
+                if (touch.phase == TouchPhase.Began)
+                {
+                    spawned = true;
+                    insText.SetActive(false);
+                    TouchBegan(touch);
+                }
+
+                doggy.transform.LookAt(Camera.main.transform);
+                doggy.transform.eulerAngles = new Vector3(0, doggy.transform.eulerAngles.y,0);
             }
         }
 
@@ -123,6 +137,8 @@ namespace Niantic.ARDK.Templates
             
             var position = hitTestResults[0].WorldTransform.ToPosition();
             OHcontroller.ObjectHolder.SetActive(true);
+            
+
             
             if (Transition) 
             {

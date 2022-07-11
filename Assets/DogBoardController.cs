@@ -30,7 +30,7 @@ public class DogBoardController : MonoBehaviour
 
             transform.position = Vector3.Lerp(transform.position, hoverTransform.position, 0.33f);
 
-            if (Vector3.Distance(transform.position, Camera.main.transform.position) > 3f)
+            if (Vector3.Distance(transform.position, Camera.main.transform.position) > 2.7f)
             {
                 Debug.Log("Set Position");
                 transform.Translate(Vector3.forward * 1 * Time.deltaTime);
